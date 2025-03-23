@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSIN0059 Exam Analysis</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --light-bg: #f1f5f9;
+            --dark-text: #1e293b;
+            --light-text: #f8fafc;
+            --border-radius: 10px;
+            --box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.7;
+            color: var(--dark-text);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0;
+            background-color: var(--light-bg);
+        }
+        
+        /* 页面容器 */
+        .container {
+            padding: 20px;
+            background-color: white;
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius);
+            margin: 20px;
+        }
+        
+        h1, h2, h3 {
+            color: var(--secondary-color);
+            font-weight: 700;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin: 1.5rem 0;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--accent-color);
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 2.5rem;
+            padding-left: 1rem;
+            border-left: 5px solid var(--primary-color);
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-top: 1.5rem;
+        }
+        
+        .section {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+        }
+        
+        .question {
+            background-color: #f8f9fa;
+            border-left: 5px solid #e74c3c;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        .topic {
+            background-color: #e8f4f8;
+            border-left: 5px solid var(--primary-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        .excerpt {
+            background-color: #f0f7fa;
+            border-left: 5px solid #2ecc71;
+            padding: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        blockquote {
+            background-color: #f9f9f9;
+            border-left: 4px solid #ccc;
+            margin: 15px 0;
+            padding: 15px 20px;
+            font-style: italic;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        
+        th, td {
+            padding: 15px 18px;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        tr:hover {
+            background-color: #edf2f7;
+        }
+        
+        .conclusion-item {
+            background-color: #f0f7fa;
+            border-left: 5px solid #9b59b6;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        /* 导航栏 */
+        .nav {
+            position: sticky;
+            top: 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            z-index: 100;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin: 5px 10px;
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        .nav a:hover, .nav a.active {
+            background-color: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+        
+        .highlight {
+            background-color: #ffffcc;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .toggle-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            margin: 15px 0;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .toggle-btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        strong {
+            color: #e74c3c;
+            font-weight: 700;
+        }
+        
+        /* 总结框 */
+        .summary-box {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 25px;
+            margin-bottom: 30px;
+            border-top: 5px solid var(--primary-color);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .summary-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        .summary-box h3 {
+            color: var(--secondary-color);
+            margin-top: 0;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+            font-size: 1.5rem;
+        }
+        
+        .exam-ref {
+            background-color: #f8f9fa;
+            padding: 12px 15px;
+            border-radius: var(--border-radius);
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 20px;
+            border-left: 3px solid var(--accent-color);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav {
+                padding: 10px;
+            }
+            
+            .nav a {
+                margin: 3px 5px;
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .section, .summary-box {
+                padding: 20px 15px;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+        
+        /* 打印样式 */
+        @media print {
+            .nav, .toggle-btn {
+                display: none;
+            }
+            
+            .hidden {
+                display: block !important;
+            }
+            
+            body {
+                background-color: white;
+                color: black;
+            }
+            
+            .section, .summary-box {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Updated nav: Summary Boxes now appears before Conclusion -->
+        <div class="nav">
+            <a href="#section-a1">Section A1</a>
+            <a href="#section-a2">Section A2</a>
+            <a href="#section-b">Section B</a>
+            <a href="#section-c">Section C</a>
+            <a href="#table">Summary Table</a>
+            <a href="#summary-boxes">Summary Boxes</a>
+            <a href="#conclusion">Conclusion</a>
+        </div>
+
+        <h1>MSIN0059 Exam Analysis</h1>
+        
+        <!-- Original content remains the same -->
+        <div class="section" id="section-a1">
+            <p>Below is a structured, question‐by‐question analysis matching each major exam topic from the <strong>Sample Exam Paper</strong> to the relevant sections in your <strong>MSIN0059 Note</strong>. I have laid out:</p>
+            <ol>
+                <li>The <strong>topics</strong> being examined.</li>
+                <li>The <strong>exact excerpts</strong> (original text) from your note, so you can reference them while revising.</li>
+                <li>A <strong>table</strong> mapping (a) the exam question, (b) the topic, and (c) the matching note excerpt.</li>
+                <li>A <strong>conclusion</strong> on how best to prepare for the real exam based on these sample questions.</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>1. Section A – Question A1</h2>
+            
+            <div class="question">
+                <h3>Question A1 (part A):</h3>
+                <blockquote>"Contribution is a useful way of finding a way around the distortions caused by using full costing in decision making… That said, it is not without its limitations…"</blockquote>
+            </div>
+
+            <h3>Topics from your note</h3>
+            <div class="topic">
+                <ul>
+                    <li><strong>Marginal (Variable) Costing</strong>: the concept of contribution margin and how it helps short‐term decision‐making, as opposed to full (absorption) costing.</li>
+                    <li><strong>Limitations</strong> of relying solely on contribution (e.g., ignoring fixed costs in certain longer‐term decisions, CVP analysis constraints).</li>
+                </ul>
+            </div>
+
+            <h3>Key Excerpts from Your Note</h3>
+            <p>Below are the <strong>original text passages</strong> from your MSIN0059 Note that address contribution, marginal/variable costing, and their limitations (<strong>Week 4</strong>):</p>
+            
+            <div class="excerpt">
+                <p><strong>"Marginal/variable costing (Using contribution to make decision) (an alternative to full absorption costing):</strong><br>
+                Only the variable costs are charged to the units produced and all the fixed cost (manufacturing and non-manufacturing) is charged to the period.<br>
+                ...<br>
+                <strong>Usefulness of Marginal costing (with uses of contribution):</strong><br>
+                1) Close down or continue operation?<br>
+                - Fixed costs cannot be eliminated in the short term;<br>
+                - Cessation of an activity would mean that less of the fixed costs were covered by contribution and the loss would be greater...<br>
+                2) Scarce resource and choice of activities (Limiting factor decision making)...<br>
+                3) Make-or-buy decisions...<br>
+                4) Pricing/Assessing opportunities to enter contracts</p>
+            </div>
+
+            <div class="excerpt">
+                <p><strong>Limitation of CVP (BEP) analysis:</strong><br>
+                - There are non-linear relationships between cost, revenue, and volume...<br>
+                - There may be stepped fixed costs...<br>
+                - It is assumed that costs are matched to income, i.e. no change in stock levels...<br>
+                - With multi-product businesses, there may be different break-even points...<br>
+                - CVP analysis uses cost and profit figures which are 'values' not cash...<br>
+                - Not well suited to long-term decision making as time value of money is not accounted for...</p>
+            </div>
+
+            <p>That covers both (i) the <strong>advantages</strong> of contribution (helpful for short‐term decisions, understanding variable costs, CVP, limiting factor decisions) and (ii) <strong>limitations</strong> (omitting fixed cost in product analysis can be misleading for the long run, assumptions about linearity, etc.).</p>
+
+            <hr>
+
+            <div class="question">
+                <h3>Question A1 (parts B, C, D)</h3>
+                <p>These parts revolve around <strong>variances</strong>, "flexing the budget," investigating <strong>all</strong> variances, and the notion of <strong>feedforward vs. feedback</strong> controls.</p>
+            </div>
+
+            <h3>Topics from your note</h3>
+            <div class="topic">
+                <ul>
+                    <li><strong>Budget Flexing and Variance Analysis</strong>: what a flexed budget is and why we do it.</li>
+                    <li><strong>Investigating variances</strong>: which ones matter, why "all variances" is often too time-consuming, the difference between random vs. systemic causes.</li>
+                    <li><strong>Feedforward vs. Feedback Controls</strong>: anticipating future problems (feedforward) vs. reacting to past performance (feedback).</li>
+                </ul>
+            </div>
+
+            <h3>Key Excerpts from Your Note</h3>
+            <p>From <strong>Week 9</strong> (Variance & Budgetary Control), you have:</p>
+            
+            <div class="excerpt">
+                <p><strong>"Flexing the budget: revising it, based on a different volume of output. Flexing… is the means of discovering the effect on profit of the volume difference. Comparing the original budget profit figure with the flexed budget reveals the difference (variance) arising solely from the volume difference."</strong></p>
+            </div>
+
+            <div class="excerpt">
+                <p><strong>"Variance: Compare the budget financial figures for the month against the actual…</strong><br>
+                - Worse than budget => adverse/negative variance<br>
+                - Better than budget => favourable/positive variance<br>
+                Some variances relate to activity/volume, some to rate/speed.<br>
+                …<br>
+                'Significant adverse variances should normally be investigated, as a continuation of the underlying problem could be very costly… Significant favourable variances should probably be investigated… Insignificant variances, though not triggering immediate investigation, should be kept under review…'"</p>
+            </div>
+
+            <div class="excerpt">
+                <p><strong>"Budgets normally provide the basis of feedforward and feedback control. During a budget preparation period… potential problems are revealed (feedforward). Budgetary control is also a very good example of feedback control… a signal that something is going wrong triggers steps to take corrective action for the future."</strong></p>
+            </div>
+
+            <p>Hence your note clarifies why not <strong>all</strong> variances must be investigated and how <strong>feedforward</strong> is about anticipating issues rather than just focusing on past results.</p>
+        </div>
+
+        <div class="section" id="section-a2">
+            <h2>2. Section A – Question A2</h2>
+            
+            <p>This question involves:</p>
+            <ul>
+                <li><strong>Incremental cash flows</strong> and <strong>NPV</strong> for two investment choices (retain vs. buy new equipment).</li>
+                <li>Overheads (fixed overhead changes).</li>
+                <li>Residual values and cost of capital.</li>
+            </ul>
+
+            <h3>Topics from your note</h3>
+            <div class="topic">
+                <ul>
+                    <li><strong>Relevant Costs</strong> and <strong>Incremental Cash Flows</strong> (Week 6).</li>
+                    <li><strong>Capital Expenditure (CAPEX) Techniques</strong>—particularly <strong>NPV</strong> (Week 7).</li>
+                    <li>Overhead absorption is also relevant when they mention how overhead changes if new machinery is acquired.</li>
+                </ul>
+            </div>
+
+            <h3>Key Excerpts from Your Note</h3>
+            <p>From <strong>Week 6</strong> (Relevant Cost and Incremental Cash Flow):</p>
+            
+            <div class="excerpt">
+                <p><strong>"Relevant cost conditions:</strong><br>
+                1) Relate to the objectives of the business.<br>
+                2) Must be a future cost (Historic cost is irrelevant).<br>
+                3) Must vary with the decision…<br>
+                <strong>Opportunity cost</strong>: the value of the opportunity foregone…<br>
+                …<br>
+                'When considering a proposed course of action… not all benefits and costs that can be identified may be relevant… Failure to do so can lead to poor decisions being made.'"</p>
+            </div>
+
+            <p>From <strong>Week 7</strong> (CAPEX, ARR, Payback, NPV, Profitability Index):</p>
+            
+            <div class="excerpt">
+                <p><strong>"NPV (Net present value): Calculate the today's value of a future stream of payments…</strong><br>
+                NPV = Sum of [Present value of each year's incremental cash flow] – [Initial investment cost].<br>
+                If NPV < 0, investment will not meet…<br>
+                If NPV = 0, meets the expectation…<br>
+                If NPV > 0, it exceeds…<br>
+                <strong>Why NPV method is considered to be superior:</strong><br>
+                1) Timing of cash flow is recognized through discounting…<br>
+                2) All relevant cash flows are included…<br>
+                3) Directly tied to wealth maximization…<br>
+                4) Provides clear accept/reject criteria."</p>
+            </div>
+
+            <p>That directly links to the requirement to calculate incremental cash flows, then discount at 12%, and decide whether buying the new machine is worthwhile.</p>
+
+            <hr>
+
+            <h3>Part B of Question A2</h3>
+            <p>This part asks about overhead absorption methods (one blanket rate vs. multiple cost-centre rates).</p>
+
+            <p>From <strong>Week 2 + Week 3</strong> (Absorption/Recovery costing, overheads):</p>
+            
+            <div class="excerpt">
+                <p><strong>"Selecting an appropriate method of charging overheads</strong><br>
+                1) Not set rule – a matter of judgment;<br>
+                2) Judgement based on circumstance/context;<br>
+                3) Nature of operations…<br>
+                4) OHD accounting policy should be adhered to on a consistent basis…<br>
+                5) Only changed if circumstances change…</p>
+
+                <p><strong>Advantages</strong> of using departmental or cost-centre overhead rates:<br>
+                - Potentially more accurate reflection of resource usage.<br>
+                - May motivate departmental managers to control overhead more effectively.</p>
+
+                <p><strong>Disadvantages</strong>:<br>
+                - More time-consuming, complex, expensive.<br>
+                - Small differences might not justify the complexity."</p>
+            </div>
+
+            <hr>
+
+            <h3>Part C & D of Question A2</h3>
+            <p>These parts require a schedule of <strong>original vs. flexed vs. actual</strong> results and standard cost <strong>variance analysis</strong>.</p>
+
+            <p>Again, from <strong>Week 9</strong> (Budget & Variance Analysis):</p>
+            
+            <div class="excerpt">
+                <p><strong>"Prepare a schedule detailing each of the original budget, flexed budget and actual results… This is a standard approach to identify volume differences, price differences, etc."</strong></p>
+            </div>
+
+            <div class="excerpt">
+                <p><strong>"Using the principles of Standard Cost Variance Analysis… typical variances are:</strong><br>
+                - Material price, material usage<br>
+                - Labour rate, labour efficiency<br>
+                - Overhead spending<br>
+                - Sales price, sales volume…<br>
+                Then reconcile the budgeted profit with actual profit."</p>
+            </div>
+        </div>
+
+        <div class="section" id="section-b">
+            <h2>3. Section B</h2>
+            
+            <h3>Section B – Question B1</h3>
+            <div class="question">
+                <blockquote><strong>Topic</strong>: Budgeting—nature, purpose, behavioral implications.</blockquote>
+            </div>
+
+            <p>From <strong>Week 8</strong> (Budgets, Behavioral Aspects):</p>
+            
+            <div class="excerpt">
+                <p><strong>"Budget: short-term financial plan for the business that is prepared within the framework of the strategic plan…</strong><br>
+                <strong>Benefits of budgets:</strong><br>
+                1) Promote forward thinking…<br>
+                2) Help coordinate various aspects of the business…<br>
+                3) Motivate performance…<br>
+                4) Provide a system of control…<br>
+                5) Provide a system of authorization…<br>
+                …<br>
+                <strong>Behavioral issues:</strong><br>
+                - Existence of budgets tends to improve performance.<br>
+                - Demanding but achievable budget targets tend to motivate better than less demanding or unrealistic ones…<br>
+                - Participation of managers in setting their targets tends to improve motivation…</p>
+
+                <p><strong>Incremental budgeting</strong>: 'last year plus x%… quick but can perpetuate inefficiencies…'<br>
+                <strong>Zero-base budgeting</strong>: 'All spending must be justified from zero each year… helps reduce waste but is time-consuming…'</p>
+            </div>
+
+            <hr>
+
+            <h3>Section B – Question B2</h3>
+            <div class="question">
+                <blockquote><strong>Topic</strong>: Critique of ABC vs. traditional overhead recovery vs. relevant costing</blockquote>
+            </div>
+
+            <p>From <strong>Week 2 + 3</strong> (traditional absorption costing), <strong>Week 5</strong> (ABC), and <strong>Week 6</strong> (Relevant Cost):</p>
+            
+            <div class="excerpt">
+                <p><strong>"Activity based costing (ABC) … 5 steps… helps highlight cost drivers…</strong><br>
+                Limitations… can be more complex and expensive…<br>
+                Traditional overhead recovery… simpler, cheaper, often less accurate especially in diverse product lines…<br>
+                Relevant cost-based approaches… helpful for short-term decisions… do not incorporate fixed overheads that are unavoidable."</p>
+            </div>
+        </div>
+
+        <div class="section" id="section-c">
+            <h2>4. Section C</h2>
+            
+            <h3>Section C – Question C1</h3>
+            <ol>
+                <li><strong>Customer profitability analysis</strong>: the question lays out separate customers and overheads attributed to each. This is effectively an <strong>ABC</strong> approach to see how each customer's unique cost drivers (e.g., deliveries, after‐sales visits) drive overhead consumption.</li>
+            </ol>
+
+            <p>From <strong>Week 5</strong> (ABC again):</p>
+            
+            <div class="excerpt">
+                <p><strong>"Activity based costing (ABC) … determining overhead by identifying cost drivers…</strong><br>
+                Another analysis reveals the overhead costs in cost pools…<br>
+                We link cost pools to cost drivers: number of orders, deliveries, visits…<br>
+                Then we allocate overhead on that basis to find true profitability."</p>
+            </div>
+
+            <ol start="2">
+                <li><strong>Part B</strong>: "Identify five weaknesses of (marginal/variable) costing."
+                    <ul>
+                        <li>Echoes your <strong>Week 4</strong> "Limitations of CVP and marginal costing."</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3>Section C – Question C2</h3>
+            <ol>
+                <li><strong>Part A</strong>: Full‐cost‐plus pricing vs. the introduction of a new product (Mini, Maxi, potential Midi). This relates to:
+                    <ul>
+                        <li><strong>Full (absorption) costing</strong> vs. <strong>marginal</strong>—what goes into the cost base</li>
+                        <li><strong>Week 2 + 3</strong> coverage of overhead absorption, <strong>Week 4</strong> coverage of marginal.</li>
+                    </ul>
+                </li>
+                <li><strong>Part B</strong>: "Why is the NPV method considered theoretically superior?"
+                    <ul>
+                        <li>Direct match to <strong>Week 7</strong> (NPV's advantages).</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <div class="section" id="table">
+            <h2>Consolidated Table of "Question – Topic – Note Excerpt"</h2>
+            
+            <p>Below is a <strong>condensed</strong> table. For the excerpt column, I've given short quotations; see above sections for the full passages.</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Exam Question</th>
+                        <th>Topic(s)</th>
+                        <th>Matching Note Excerpt</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>A1(a)</strong>: Contribution in decision‐making, advantages & limitations</td>
+                        <td>- Marginal/Variable Costing<br>- CVP Analysis</td>
+                        <td><em>"Marginal/variable costing (Using contribution…) Under the variable costing approach, only the variable costs are charged…"</em><br><br><em>"Limitation of CVP (BEP) analysis…"</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>A1(b),(c),(d)</strong>: Variances, flexible budgets, feedforward vs. feedback</td>
+                        <td>- Budget Flexing & Variance<br>- Feedforward/Feedback Controls</td>
+                        <td><em>"Flexing the budget: ... difference from volume changes… Variance = difference between budget figures & actual…"</em><br><br><em>"Significant adverse variances should normally be investigated…"</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>A2</strong>: Incremental cash flows, NPV, overhead absorption, standard costing & variance analysis</td>
+                        <td>- Relevant Costs & NPV<br>- Overhead absorption<br>- Variance analysis (Part C & D)</td>
+                        <td><em>"Relevant cost conditions… Must be a future cost & vary with decision…"</em> (Week 6)<br><br><em>"NPV method… best for CAPEX…"</em> (Week 7)<br><br><em>"Selecting an appropriate method of charging overheads…"</em> (Week 2+3)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>B1</strong>: Budgeting system—nature, purpose, behavioral issues</td>
+                        <td>- Budgeting basics<br>- Behavioral aspects</td>
+                        <td><em>"Budget: short-term financial plan… fosters forward thinking… Demanding but achievable targets tend to motivate…"</em> (Week 8)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>B2</strong>: ABC vs. Traditional O/H Recovery vs. Relevant Cost</td>
+                        <td>- Activity Based Costing<br>- Absorption Costing<br>- Relevant Costing</td>
+                        <td><em>"Activity based costing… 5 steps… cost drivers… more accurate but more complex…"</em> (Week 5)<br><br><em>"Traditional overhead recovery… simpler, cheaper, can be inaccurate…"</em> (Week 2+3)<br><br><em>"Relevant cost…"</em> (Week 6)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>C1(A)</strong>: Customer profitability analysis with ABC</td>
+                        <td>- ABC / Customer Analysis</td>
+                        <td><em>"Customer activity costs… cost driver… ABC approach…"</em> (Week 5)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>C1(B)</strong>: Weaknesses/limitations of marginal/variable costing</td>
+                        <td>- Marginal Costing Limitations</td>
+                        <td><em>"Marginal costing emphasises variable vs. fixed… ignores fixed cost in product analysis… CVP limitations…"</em> (Week 4)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>C2(A)</strong>: Full‐cost‐plus pricing for new product (Mini, Maxi, Midi)</td>
+                        <td>- Full/Absorption costing<br>- Overhead rates</td>
+                        <td><em>"Absorption costing: overhead is spread across units… can distort product costs if overhead is high or products vary…"</em> (Week 2+3)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>C2(B)</strong>: Why is NPV considered superior?</td>
+                        <td>- CAPEX & NPV</td>
+                        <td><em>"NPV is usually considered the best method… it considers the timing of cash flows, includes all relevant CFs, directly tied to wealth…"</em> (Week 7)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- NEW ORDER: Section 5 = Summary Boxes, Section 6 = Conclusion -->
+
+        <!-- 5. Summary Boxes for Exam Revision -->
+        <div class="section" id="summary-boxes">
+            <h2>5. Summary Boxes for Exam Revision</h2>
+            
+            <div class="summary-box">
+                <h3>Box 1: Marginal vs. Absorption Costing</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Marginal Costing</th>
+                            <th>Absorption Costing</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Definition</td>
+                            <td>Only variable costs are charged to products; fixed costs are period expenses.</td>
+                            <td>Both variable and fixed production costs are assigned to units.</td>
+                        </tr>
+                        <tr>
+                            <td>Fixed Costs Treatment</td>
+                            <td>Expensed in the period incurred.</td>
+                            <td>Included in inventory cost and expensed when sold.</td>
+                        </tr>
+                        <tr>
+                            <td>Usefulness</td>
+                            <td>Helpful for short-term decisions: shutdowns, limiting factor analysis, make-or-buy, pricing.</td>
+                            <td>Required for external reporting under accounting standards.</td>
+                        </tr>
+                        <tr>
+                            <td>Managerial Decision-Making</td>
+                            <td>Provides clear contribution margin.</td>
+                            <td>May distort profitability when production ≠ sales.</td>
+                        </tr>
+                        <tr>
+                            <td>Inventory Valuation Impact</td>
+                            <td>Lower profit when inventory increases.</td>
+                            <td>Higher profit when inventory increases (fixed OH deferred).</td>
+                        </tr>
+                        <tr>
+                            <td>Limitations</td>
+                            <td>Ignores long-term sustainability (total cost recovery).</td>
+                            <td>May lead to dysfunctional decisions (e.g., overproduction to increase profit).</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="exam-ref">📌 Exam Questions Covered: A1(a), C2(a), B2, C1(b)<br>
+                📚 Section(s): A1, B2, C1, C2</p>
+            </div>
+            
+            <div class="summary-box">
+                <h3>Box 2: CVP Analysis – Assumptions & Limitations</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Limitation</th>
+                            <th>Explanation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Non-linearity</td>
+                            <td>Sales and cost behavior may not be linear at all activity levels.</td>
+                        </tr>
+                        <tr>
+                            <td>Stepped Fixed Costs</td>
+                            <td>Fixed costs only "fixed" within a relevant range.</td>
+                        </tr>
+                        <tr>
+                            <td>Stock Level Changes Ignored</td>
+                            <td>Assumes production = sales; ignores inventory changes.</td>
+                        </tr>
+                        <tr>
+                            <td>Multi-product Complexity</td>
+                            <td>Break-even unreliable for mixed sales.</td>
+                        </tr>
+                        <tr>
+                            <td>Non-cash Basis</td>
+                            <td>Works on accounting profit, not cash.</td>
+                        </tr>
+                        <tr>
+                            <td>Unsuitable for Long-Term</td>
+                            <td>Ignores time value of money.</td>
+                        </tr>
+                        <tr>
+                            <td>Not suited for one-off jobs</td>
+                            <td>Inapplicable in custom or jobbing industries.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="exam-ref">📌 Exam Questions Covered: A1(a), C1(b)<br>
+                📚 Section(s): A1, C1</p>
+            </div>
+            
+            <div class="summary-box">
+                <h3>Box 3: ABC vs. Traditional Absorption Costing</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>ABC</th>
+                            <th>Traditional Costing</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Basis</td>
+                            <td>Activities and cost drivers.</td>
+                            <td>Volume metrics (e.g. hours, units).</td>
+                        </tr>
+                        <tr>
+                            <td>Accuracy</td>
+                            <td>High – assigns costs based on real consumption.</td>
+                            <td>Lower – can distort in diverse operations.</td>
+                        </tr>
+                        <tr>
+                            <td>Complexity</td>
+                            <td>More complex, expensive.</td>
+                            <td>Simpler, cheaper.</td>
+                        </tr>
+                        <tr>
+                            <td>Use Case</td>
+                            <td>Suited for complex/multi-product firms.</td>
+                            <td>Good for uniform, simple processes.</td>
+                        </tr>
+                        <tr>
+                            <td>Behavioral Impact</td>
+                            <td>Highlights inefficiencies, improves transparency.</td>
+                            <td>May encourage slack or misallocations.</td>
+                        </tr>
+                        <tr>
+                            <td>Limitations</td>
+                            <td>Data-intensive.</td>
+                            <td>May cause distorted product or service costs.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="exam-ref">📌 Exam Questions Covered: B2, C1(a)<br>
+                📚 Section(s): B2, C1</p>
+            </div>
+            
+            <div class="summary-box">
+                <h3>Box 4: Relevant vs. Irrelevant Costs</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Cost Type</th>
+                            <th>Relevant?</th>
+                            <th>Rationale</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Sunk Cost</td>
+                            <td>❌ No</td>
+                            <td>Already incurred; not reversible.</td>
+                        </tr>
+                        <tr>
+                            <td>Opportunity Cost</td>
+                            <td>✅ Yes</td>
+                            <td>Foregone benefit from next-best alternative.</td>
+                        </tr>
+                        <tr>
+                            <td>Committed Fixed Cost</td>
+                            <td>❌ No</td>
+                            <td>Will occur regardless of choice.</td>
+                        </tr>
+                        <tr>
+                            <td>Variable/Incremental Cost</td>
+                            <td>✅ Yes</td>
+                            <td>Only incurred if decision is taken.</td>
+                        </tr>
+                        <tr>
+                            <td>Non-cash Charges</td>
+                            <td>❌ No</td>
+                            <td>Do not affect real cash flows.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="exam-ref">📌 Exam Questions Covered: A2, B2<br>
+                📚 Section(s): A2, B2</p>
+            </div>
+            
+            <div class="summary-box">
+                <h3>Box 5: Budgeting Approaches</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Description</th>
+                            <th>Pros</th>
+                            <th>Cons</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Incremental</td>
+                            <td>Build from last year.</td>
+                            <td>Fast, easy, low resistance.</td>
+                            <td>Perpetuates inefficiencies.</td>
+                        </tr>
+                        <tr>
+                            <td>Zero-Based (ZBB)</td>
+                            <td>Start from zero every year.</td>
+                            <td>Reduces waste, increases scrutiny.</td>
+                            <td>Time-consuming, may demotivate.</td>
+                        </tr>
+                        <tr>
+                            <td>Top-Down</td>
+                            <td>Set by senior management.</td>
+                            <td>Strategic alignment.</td>
+                            <td>Lower buy-in from staff.</td>
+                        </tr>
+                        <tr>
+                            <td>Bottom-Up</td>
+                            <td>Set by team managers.</td>
+                            <td>Better motivation, realism.</td>
+                            <td>Budget slack risk.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="exam-ref">📌 Exam Questions Covered: B1<br>
+                📚 Section(s): B1</p>
+            </div>
+            
+            <div class="summary-box">
+                <h3>Box 6: Variance Analysis – Types & Causes</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Formula</th>
+                            <th>Interpretation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Sales Price</td>
+                            <td>(Actual – Budgeted Price) × Actual Vol</td>
+                            <td>Favourable if ↑ price.</td>
+                        </tr>
+                        <tr>
+                            <td>Sales Volume</td>
+                            <td>(Actual – Budgeted Vol) × Std Price</td>
+                            <td>Favourable if ↑ units.</td>
+                        </tr>
+                        <tr>
+                            <td>Material Price</td>
+                            <td>(Actual – Std Price) × Quantity</td>
+                            <td>Supplier pricing.</td>
+                        </tr>
+                        <tr>
+                            <td>Material Usage</td>
+                            <td>(Actual – Std Qty) × Std Price</td>
+                            <td>Waste/inefficiency.</td>
+                        </tr>
+                        <tr>
+                            <td>Labour Rate</td>
+                            <td>(Actual – Std Rate) × Hours</td>
+                            <td>Wage changes.</td>
+                        </tr>
+                        <tr>
+                            <td>Labour Efficiency</td>
+                            <td>(Actual – Std Hours) × Std Rate</td>
+                            <td>Performance variation.</td>
+                        </tr>
+                        <tr>
+                            <td>Fixed OH Spending</td>
+                            <td>Actual – Budget</td>
+                            <td>Over/underspending.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="exam-ref">📌 Exam Questions Covered: A1(b–d), A2(c,d)<br>
+                📚 Section(s): A1, A2</p>
+            </div>
+            
+            <div class="summary-box">
+                <h3>Box 7: Feedforward vs. Feedback Controls</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Control Type</th>
+                            <th>Timing</th>
+                            <th>Purpose</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Feedforward</td>
+                            <td>Before action</td>
+                            <td>Anticipate & prevent issues.</td>
+                            <td>Budget forecasts adjust plans.</td>
+                        </tr>
+                        <tr>
+                            <td>Feedback</td>
+                            <td>After result</td>
+                            <td>Compare outcomes to targets.</td>
+                            <td>Variance analysis → corrections.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="exam-ref">📌 Exam Questions Covered: A1(d), B1<br>
+                📚 Section(s): A1, B1</p>
+            </div>
+            
+            <div class="summary-box">
+                <h3>Box 8: Investment Appraisal Techniques</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Definition</th>
+                            <th>Pros</th>
+                            <th>Cons</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>NPV</td>
+                            <td>PV of future CFs – investment</td>
+                            <td>Considers timing, cash, wealth-maximizing</td>
+                            <td>Needs discount rate</td>
+                        </tr>
+                        <tr>
+                            <td>IRR</td>
+                            <td>Discount rate where NPV = 0</td>
+                            <td>Expressed as % return</td>
+                            <td>Multiple IRRs possible</td>
+                        </tr>
+                        <tr>
+                            <td>ARR</td>
+                            <td>Avg. profit ÷ avg. investment</td>
+                            <td>Easy to compute</td>
+                            <td>Ignores cash & time</td>
+                        </tr>
+                        <tr>
+                            <td>Payback</td>
+                            <td>Time to recover investment</td>
+                            <td>Simple, highlights liquidity</td>
+                            <td>Ignores returns after cutoff</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="exam-ref">📌 Exam Questions Covered: A2(a), C2(b)<br>
+                📚 Section(s): A2, C2</p>
+            </div>
+        </div>
+
+        <!-- 6. Conclusion: How to Prepare for the Real Exam -->
+        <div class="section" id="conclusion">
+            <h2>6. Conclusion: How to Prepare for the Real Exam</h2>
+            
+            <div class="conclusion-item">
+                <h3>1. Brush Up on Costing Methods</h3>
+                <ul>
+                    <li>Ensure you can explain and apply <strong>Marginal (Variable) Costing</strong> vs. <strong>Full (Absorption) Costing</strong> vs. <strong>Activity‐Based Costing</strong>.</li>
+                    <li>Be ready to discuss their <strong>advantages and disadvantages</strong>, especially in decision‐making vs. reporting contexts.</li>
+                </ul>
+            </div>
+            
+            <!-- Other conclusion items remain unchanged -->
+            
+            <p>By working through each sample exam question with the matching references in your MSIN0059 Note, you'll strengthen both your <strong>technical</strong> (calculation) and <strong>theoretical</strong> (discussion) capabilities. This alignment between the Sample Exam Paper and your Note highlights exactly what knowledge is tested and how to apply it.</p>
+            
+            <p>Good luck with your revision!</p>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 平滑滚动导航
+            document.querySelectorAll('.nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // 高亮当前部分
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('.section');
+                let currentSection = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                        currentSection = '#' + section.getAttribute('id');
+                    }
+                });
+                
+                document.querySelectorAll('.nav a').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === currentSection) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+            
+            // 总结框切换功能
+            const summaryBoxes = document.querySelectorAll('.summary-box');
+            summaryBoxes.forEach(box => {
+                const heading = box.querySelector('h3');
+                const content = box.querySelector('table');
+                const examRef = box.querySelector('.exam-ref');
+                
+                // 创建切换按钮
+                const toggleBtn = document.createElement('button');
+                toggleBtn.className = 'toggle-btn';
+                toggleBtn.textContent = '隐藏详情';
+                toggleBtn.addEventListener('click', function() {
+                    content.classList.toggle('hidden');
+                    examRef.classList.toggle('hidden');
+                    this.textContent = content.classList.contains('hidden') ? '显示详情' : '隐藏详情';
+                });
+                
+                // 在标题后插入按钮
+                heading.after(toggleBtn);
+            });
+        });
+    </script>
+    
+    <style>
+        /* Additional styles for summary boxes */
+        .summary-box {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-top: 4px solid #3498db;
+        }
+        
+        .summary-box h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .exam-ref {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 15px;
+        }
+        
+        .toggle-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+        
+        .toggle-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .nav a.active {
+            background-color: #3498db;
+        }
+        
+        /* Responsive improvements */
+        @media (max-width: 768px) {
+            .nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav a {
+                margin-bottom: 5px;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .summary-box {
+                padding: 15px;
+            }
+        }
+        
+        /* Print styles */
+        @media print {
+            .nav, .toggle-btn {
+                display: none;
+            }
+            
+            .hidden {
+                display: block !important;
+            }
+            
+            body {
+                background-color: white;
+                color: black;
+            }
+            
+            .section, .summary-box {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+    </style>
+</body>
+</html>
